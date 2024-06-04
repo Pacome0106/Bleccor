@@ -24,7 +24,8 @@ final newVersion = NewVersionPlus(
 );
 
 // link of playStore
-const String playStoreUrl = 'https://play.google.com/store/apps/details?id=com.bitz.bleccor';
+const String playStoreUrl =
+    'https://play.google.com/store/apps/details?id=com.bitz.bleccor';
 // link of privacy policy
 const String privacyUrl = 'https://baadhi.com/privacy';
 // link of terms & conditions
@@ -40,12 +41,23 @@ List<Map<String, dynamic>> simulators = [
     'image': Assets.assetsBillan01,
   },
   {
+    'title':'Bilan - Matière sans réactions',
+    'subtitle':'Cas dans le processus de Distillation',
+    'question':"""Un mélange liquide contient x(%) en masse de benzène et 55 % de Toluène doit être séparé dans une colonne à distiller continue. 
+Si la densité du liquide est de p et que y de mélange est alimenté dans la colonne, déterminez le débit massique de chaque constituant dans le distillat (overhead stream) et 
+le condensat (bottom stream) lorsque l’on atteint une pureté de z (%) en benzène dans la partie supérieure de la colonne et w (%) dans sa partie inferieure.
+    """,
+    'enter':'',
+    'image':Assets.assetsBillan02,
+  },
+  {
     'title': 'Bilan - Matière avec réaction',
     'subtitle': "Lorsqu’au moins une réaction a lieu dans le système",
     'question':
         """Une réaction stoechiométrique en phase liquide A --> B se réalise dans un réacteur (continu à parfaite agitation) de V litres.
 Le diagramme ci-après représente le processus. L’agitation étant parfaite, la concentration du produit sortant du réacteur est la même que celle de la solution à l’intérieur de ce dernier. Cette solution contient initialement CA mol/l du réactif A. Calculez CA,S, concentration de A pour un processus non-transitoire""",
     'enter': '',
-    'image': Assets.assetsBillan02,
-  }
+    'image': Assets.assetsBillan03,
+  },
+
 ];

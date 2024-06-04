@@ -2,15 +2,16 @@ import 'dart:convert';
 
 import 'package:blecor/models/class_manager/history_1.dart';
 import 'package:blecor/models/class_manager/history_2.dart';
+import 'package:blecor/models/class_manager/history_3.dart';
 import 'package:blecor/models/preferences_manager/shared.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
 class AllFonction {
-
   String doubleToString(double value) {
     return value.toStringAsFixed(2);
   }
+
   // -------- fonction pour fermer un textField-------
   void closeKeyboard(BuildContext context) {
     FocusScope.of(context).requestFocus(FocusNode());
@@ -22,13 +23,13 @@ class AllFonction {
     int remainingSeconds = (seconds % 60).floor();
 
     String hourSuffix = ' h';
-    String minuteSuffix =  ' min' ;
-    String secondSuffix = ' sec' ;
+    String minuteSuffix = ' min';
+    String secondSuffix = ' sec';
 
-    String timeString = '$hours$hourSuffix : ${minutes.toString().padLeft(2, '0')}$minuteSuffix : ${remainingSeconds.toString().padLeft(2, '0')}$secondSuffix';
+    String timeString =
+        '$hours$hourSuffix : ${minutes.toString().padLeft(2, '0')}$minuteSuffix : ${remainingSeconds.toString().padLeft(2, '0')}$secondSuffix';
     return timeString;
   }
-
 
   double findT(double x, dynamic y) {
     double t;
@@ -49,12 +50,35 @@ class AllFonction {
     return t;
   }
 
-  double calculateCa(double x,double y, double z, double t,  double ca0) {
-
-    double ca =(y/z) +(ca0-(y/z))*exp(-z*t);
+  double calculateCa(double x, double y, double z, double t, double ca0) {
+    double ca = (y / z) + (ca0 - (y / z)) * exp(-z * t);
 
     return ca;
   }
+
+  // -------- function to calcul 2 exercise ----------
+  String calculateB6T6B7T7(double y, double x, double z, double w, double p) {
+    double rho = 1.0;
+    double X = x / 100;
+    double Z = z / 100;
+    double W = w / 100;
+    double Y = y * p;
+    // Calculer D'
+    double D1 = (X - W) * rho * Y / (Z - W);
+
+    // Calculer W'
+    double W1 = rho * Y - D1;
+
+    String B6 = AllFonction().doubleToString(D1 * Z);
+    String B7 = AllFonction().doubleToString(W1 * W);
+
+    String T6 = AllFonction().doubleToString(D1 - (D1 * Z));
+    String T7 = AllFonction().doubleToString(W1 - (W1 * W));
+
+    return """B6: $B6 kg/min / T6: $T6 kg/min
+B7: $B7 kg/min / T7: $T7 kg/min""";
+  }
+
   // -------- add a history01 to dataBase ----------
   Future<void> addHistory01(HistoryData1 item) async {
     final List<HistoryData1> history = getHistory01FromSharedPreferences();
@@ -65,13 +89,14 @@ class AllFonction {
   }
 
   // -------- History01 to dataBase ------------
-  Future<void> saveHistory01ToSharedPreferences(List<HistoryData1> history)async{
-    List<String> historyItem = history.map((item) => json.encode(item.toMap())).toList();
+  Future<void> saveHistory01ToSharedPreferences(
+      List<HistoryData1> history) async {
+    List<String> historyItem =
+        history.map((item) => json.encode(item.toMap())).toList();
     await PreferencesService.instance.setStringList('history_01', historyItem);
   }
 
-
-  // -------- add a history01 to dataBase ----------
+  // -------- add a history02 to dataBase ----------
   Future<void> addHistory02(HistoryData2 item) async {
     final List<HistoryData2> history = getHistory02FromSharedPreferences();
 
@@ -81,14 +106,34 @@ class AllFonction {
   }
 
   // -------- History02 to dataBase ------------
-  Future<void> saveHistory02ToSharedPreferences(List<HistoryData2> history)async{
-    List<String> historyItem = history.map((item) => json.encode(item.toMap())).toList();
+  Future<void> saveHistory02ToSharedPreferences(
+      List<HistoryData2> history) async {
+    List<String> historyItem =
+    history.map((item) => json.encode(item.toMap())).toList();
     await PreferencesService.instance.setStringList('history_02', historyItem);
   }
 
-    // --------- get all history01 to dataBase ---------
-  List<HistoryData1> getHistory01FromSharedPreferences()  {
-    List<String>? historyJsonList = PreferencesService.instance.getStringList('history_01');
+  // -------- add a history03 to dataBase ----------
+  Future<void> addHistory03(HistoryData3 item) async {
+    final List<HistoryData3> history = getHistory03FromSharedPreferences();
+
+    // Ajouter une history03 au stockage
+    history.add(item);
+    await saveHistory03ToSharedPreferences(history);
+  }
+
+  // -------- History03 to dataBase ------------
+  Future<void> saveHistory03ToSharedPreferences(
+      List<HistoryData3> history) async {
+    List<String> historyItem =
+        history.map((item) => json.encode(item.toMap())).toList();
+    await PreferencesService.instance.setStringList('history_03', historyItem);
+  }
+
+  // --------- get all history01 to dataBase ---------
+  List<HistoryData1> getHistory01FromSharedPreferences() {
+    List<String>? historyJsonList =
+        PreferencesService.instance.getStringList('history_01');
 
     if (historyJsonList == null) return [];
 
@@ -98,15 +143,27 @@ class AllFonction {
     }).toList();
   }
 
-  // --------- get all history02 to dataBase ---------
-  List<HistoryData2> getHistory02FromSharedPreferences()  {
-    List<String>? historyJsonList = PreferencesService.instance.getStringList('history_02');
-
+  // --------- get all history03 to dataBase ---------
+  List<HistoryData2> getHistory02FromSharedPreferences() {
+    List<String>? historyJsonList =
+    PreferencesService.instance.getStringList('history_02');
     if (historyJsonList == null) return [];
 
     return historyJsonList.map((historyJson) {
       Map<String, dynamic> historyMap = json.decode(historyJson);
       return HistoryData2.fromMap(historyMap, historyMap['id'] ?? '');
+    }).toList();
+  }
+
+  // --------- get all history03 to dataBase ---------
+  List<HistoryData3> getHistory03FromSharedPreferences() {
+    List<String>? historyJsonList =
+        PreferencesService.instance.getStringList('history_03');
+    if (historyJsonList == null) return [];
+
+    return historyJsonList.map((historyJson) {
+      Map<String, dynamic> historyMap = json.decode(historyJson);
+      return HistoryData3.fromMap(historyMap, historyMap['id'] ?? '');
     }).toList();
   }
 

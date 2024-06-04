@@ -60,7 +60,53 @@ class _TablePageState extends State<TablePage> {
       ];
 
       history = AllFonction().getHistory01FromSharedPreferences();
-    } else if (widget.index == 2) {
+    } else if (widget.index == 2){
+      columns = [
+        DataColumn(
+          label: SmolText(
+            text: 'N°',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'x(%)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'y(l/min)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'z(%)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'w(%)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'p',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: BoldText(
+            text: 'Resultat',
+            size: 14,
+          ),
+        ),
+      ];
+      history = AllFonction().getHistory02FromSharedPreferences();
+    } else if (widget.index == 3) {
       columns = [
         DataColumn(
           label: SmolText(
@@ -117,7 +163,7 @@ class _TablePageState extends State<TablePage> {
           ),
         ),
       ];
-      history = AllFonction().getHistory02FromSharedPreferences();
+      history = AllFonction().getHistory03FromSharedPreferences();
     }
     super.initState();
   }
@@ -149,8 +195,10 @@ class _TablePageState extends State<TablePage> {
               String key = '';
               if (widget.index == 1) {
                 key = 'history_01';
-              } else if (widget.index == 2) {
+              }else if(widget.index == 2){
                 key = 'history_02';
+              } else if (widget.index == 3) {
+                key = 'history_03';
               }
               PreferencesService.instance.remove(key);
               Navigator.pushAndRemoveUntil(
@@ -250,7 +298,45 @@ class _TablePageState extends State<TablePage> {
                                         size: 14,
                                       )),
                                     ];
-                                  } else if (widget.index == 2) {
+                                  }else if (widget.index == 2){
+                                    rows = [
+                                      DataCell(
+                                        SmolText(
+                                          text: '${index + 1}',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      // Afficher l'index
+                                      DataCell(SmolText(
+                                          text: item.variable01.toString())),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable02.toString(),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable03.toString(),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable04.toString(),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable05.toString(),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      DataCell(BoldText(
+                                        text: item.result.toString(),
+                                        size: 14,
+                                      )),
+                                    ];
+                                  } else if (widget.index == 3) {
                                     rows = [
                                       DataCell(
                                         SmolText(

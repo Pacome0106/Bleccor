@@ -21,11 +21,13 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   List history01 = [];
   List history02 = [];
+  List history03 = [];
 
   @override
   void initState() {
     history01 = AllFonction().getHistory01FromSharedPreferences();
     history02 = AllFonction().getHistory02FromSharedPreferences();
+    history03 = AllFonction().getHistory03FromSharedPreferences();
     super.initState();
   }
 
@@ -64,31 +66,78 @@ class _HistoryPageState extends State<HistoryPage> {
 
         SliverPadding(
           padding: const EdgeInsets.only(left: 10, right: 10),
-          sliver: history01.isNotEmpty || history02.isNotEmpty
+          sliver: history01.isNotEmpty ||
+                  history02.isNotEmpty ||
+                  history03.isNotEmpty
               ? SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                      childCount:history01.isNotEmpty && history02.isNotEmpty ?2:1,
-                      (context, index) => Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Tile(
-                                title: simulators[index]['title'],
-                                subtitle: simulators[index]['subtitle'],
-                                index: index + 1,
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => TablePage(
-                                        index: index + 1,
-                                      ),
+                  delegate: SliverChildListDelegate(
+                    [
+                      if (history01.isNotEmpty)
+                        Column(
+                          children: [
+                            Tile(
+                              title: simulators[0]['title'],
+                              subtitle: simulators[0]['subtitle'],
+                              index:  1,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TablePage(
+                                      index:  1,
                                     ),
-                                  );
-                                },
-                              ),
-                              sizedBox,
-                            ],
-                          )),
+                                  ),
+                                );
+                              },
+                            ),
+                            sizedBox,
+                          ],
+                        ),
+
+                      if (history02.isNotEmpty)
+                        Column(
+                          children: [
+                            Tile(
+                              title: simulators[1]['title'],
+                              subtitle: simulators[1]['subtitle'],
+                              index:  2,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TablePage(
+                                      index:  2,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            sizedBox,
+                          ],
+                        ),
+                      if (history03.isNotEmpty)
+                        Column(
+                          children: [
+                            Tile(
+                              title: simulators[2]['title'],
+                              subtitle: simulators[2]['subtitle'],
+                              index:  3,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TablePage(
+                                      index:  3,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            sizedBox,
+                          ],
+                        ),
+                    ],
+                  ),
                 )
               : SliverList(
                   delegate: SliverChildListDelegate(

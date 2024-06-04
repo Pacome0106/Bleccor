@@ -170,7 +170,7 @@ class _SearchPageState extends State<SearchPage>
                               crossAxisCount: 2,
                               mainAxisSpacing: 10,
                               crossAxisSpacing: 10,
-                              childAspectRatio: 0.9),
+                              childAspectRatio: 0.8),
                           itemBuilder: (context, index) =>
                               GestureDetector(
                                 onTap: () {
