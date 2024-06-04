@@ -41,7 +41,7 @@ List<Map<String, dynamic>> simulators = [
     'image': Assets.assetsBillan01,
   },
   {
-    'title':'Bilan - Matière sans réactions',
+    'title':'Bilan - Matière sans réaction',
     'subtitle':'Cas dans le processus de Distillation',
     'question':"""Un mélange liquide contient x(%) en masse de benzène et 55 % de Toluène doit être séparé dans une colonne à distiller continue. 
 Si la densité du liquide est de p et que y de mélange est alimenté dans la colonne, déterminez le débit massique de chaque constituant dans le distillat (overhead stream) et 

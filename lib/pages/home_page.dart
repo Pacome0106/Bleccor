@@ -119,8 +119,10 @@ class _HomePageState extends State<HomePage> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     ExercisesDetail(
-                                                  subtitle: simulators[index]
+                                                  title: simulators[index]
                                                       ['title'],
+                                                  subtitle: simulators[index]
+                                                  ['subtitle'],
                                                   exercise: simulators[index]
                                                       ['question'],
                                                   enter: simulators[index]
@@ -162,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                                                 sizedBox,
                                                 Hero(
                                                   tag: simulators[index]
-                                                          ['title'] +
+                                                          ['subtitle'] +
                                                       (index + 1).toString(),
                                                   child: Container(
                                                     height: 80,

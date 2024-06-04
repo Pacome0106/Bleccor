@@ -18,6 +18,7 @@ import '../models/fonctions.dart';
 class ExercisesDetail extends StatefulWidget {
   const ExercisesDetail({
     super.key,
+    required this.title,
     required this.subtitle,
     required this.exercise,
     required this.enter,
@@ -25,6 +26,7 @@ class ExercisesDetail extends StatefulWidget {
     required this.index,
   });
 
+  final String title;
   final String subtitle;
   final String exercise;
   final String enter;
@@ -112,7 +114,7 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                   [
                     sizedBox,
                     SmolText(
-                      text: widget.subtitle.toUpperCase(),
+                      text: widget.title.toUpperCase(),
                       color: Theme.of(context).colorScheme.onSecondary,
                     ),
                     sizedBox,

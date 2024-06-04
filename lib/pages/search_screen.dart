@@ -179,8 +179,10 @@ class _SearchPageState extends State<SearchPage>
                                     MaterialPageRoute(
                                       builder: (context) =>
                                           ExercisesDetail(
-                                            subtitle: filteredVideos[index]
+                                            title: filteredVideos[index]
                                             ['title'],
+                                            subtitle: simulators[index]
+                                            ['subtitle'],
                                             exercise: filteredVideos[index]
                                             ['question'],
                                             enter: filteredVideos[index]
@@ -222,7 +224,7 @@ class _SearchPageState extends State<SearchPage>
                                       sizedBox,
                                       Hero(
                                         tag: filteredVideos[index]
-                                        ['title'] +
+                                        ['subtitle'] +
                                             (index + 1).toString(),
                                         child: Container(
                                           height: 80,
