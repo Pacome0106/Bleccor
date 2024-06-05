@@ -710,6 +710,7 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                                         .convertSecondsToTime(time);
                                     setState(() {
                                       isResult = true;
+                                      isSave = false;
                                       result = timeString;
                                     });
                                     print("==========> time :$timeString");
@@ -721,6 +722,7 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                                     double P = double.parse(p.text);
                                     setState(() {
                                       isResult = true;
+                                      isSave = false;
                                       result = AllFonction()
                                           .calculateB6T6B7T7(Y, X, Z, W, P);
                                     });
@@ -738,8 +740,8 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                                         .calculateCa(x, y, z, t, k);
                                     setState(() {
                                       isResult = true;
-                                      result =
-                                          AllFonction().doubleToString(caValue);
+                                      isSave = false;
+                                      result = AllFonction().doubleToString(caValue);
                                     });
                                     print("=======> $caValue");
                                   }

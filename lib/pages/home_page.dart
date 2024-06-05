@@ -1,13 +1,12 @@
-import 'package:blecor/generated/assets.dart';
-import 'package:blecor/models/fonctions.dart';
+import 'package:blecor/models/preferences_manager/shared_preferences.dart';
 import 'package:blecor/pages/exercises_detail.dart';
 import 'package:blecor/pages/history.dart';
 import 'package:blecor/pages/search_screen.dart';
 import 'package:blecor/pages/setting_page.dart';
 import 'package:blecor/pages/widgets/bold_text.dart';
+import 'package:blecor/pages/widgets/get_code.dart';
 import 'package:blecor/pages/widgets/my_button.dart';
 import 'package:blecor/pages/widgets/smol_text.dart';
-import 'package:blecor/pages/widgets/tile.dart';
 import 'package:blecor/pages/widgets/variables.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/cupertino.dart';
@@ -65,6 +64,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    String code = MyPreferences.getCode();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
@@ -92,100 +92,99 @@ class _HomePageState extends State<HomePage> {
                         ),
                         sizedBox,
                         sizedBox,
-                       Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    BoldText(
-                                      text: "Bleccor",
-                                      size: 30,
-                                    ),
-                                    sizedBox,
-                                    sizedBox,
-                                    Expanded(
-                                      child: GridView.builder(
-                                        itemCount: simulators.length,
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                mainAxisSpacing: 10,
-                                                crossAxisSpacing: 10,
-                                                childAspectRatio: 0.8),
-                                        itemBuilder: (context, index) =>
-                                            GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ExercisesDetail(
-                                                  title: simulators[index]
-                                                      ['title'],
-                                                  subtitle: simulators[index]
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BoldText(
+                                text: "Bleccor",
+                                size: 30,
+                              ),
+                              sizedBox,
+                              sizedBox,
+                              Expanded(
+                                child: GridView.builder(
+                                  itemCount: simulators.length,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          mainAxisSpacing: 10,
+                                          crossAxisSpacing: 10,
+                                          childAspectRatio: 0.8),
+                                  itemBuilder: (context, index) =>
+                                      GestureDetector(
+                                    onTap: () {
+                                      if (code == codeAccess) {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ExercisesDetail(
+                                              title: simulators[index]['title'],
+                                              subtitle: simulators[index]
                                                   ['subtitle'],
-                                                  exercise: simulators[index]
-                                                      ['question'],
-                                                  enter: simulators[index]
-                                                      ['enter'],
-                                                  image: simulators[index]
-                                                      ['image'],
-                                                  index: index + 1,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          child: Container(
-                                            padding: const EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                              borderRadius: borderRadius,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .background,
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.3),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 15,
-                                                  offset: const Offset(0, 9),
-                                                )
-                                              ],
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                BoldText(
-                                                    text: simulators[index]
-                                                        ['title'],
-                                                    size: 14),
-                                                sizedBox,
-                                                SmolText(
-                                                    text: simulators[index]
-                                                        ['subtitle']),
-                                                sizedBox,
-                                                Hero(
-                                                  tag: simulators[index]
-                                                          ['subtitle'] +
-                                                      (index + 1).toString(),
-                                                  child: Container(
-                                                    height: 80,
-                                                    decoration: BoxDecoration(
-                                                      image: DecorationImage(
-                                                        image: AssetImage(
-                                                            simulators[index]
-                                                                ['image']),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
+                                              exercise: simulators[index]
+                                                  ['question'],
+                                              enter: simulators[index]['enter'],
+                                              image: simulators[index]['image'],
+                                              index: index + 1,
                                             ),
                                           ),
-                                        ),
+                                        );
+                                      } else {
+                                        showDialogConfirm(
+                                            context, simulators[index], index);
+                                      }
+                                    },
+                                    child: Container(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                        borderRadius: borderRadius,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .background,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.3),
+                                            spreadRadius: 5,
+                                            blurRadius: 15,
+                                            offset: const Offset(0, 9),
+                                          )
+                                        ],
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          BoldText(
+                                              text: simulators[index]['title'],
+                                              size: 14),
+                                          sizedBox,
+                                          SmolText(
+                                              text: simulators[index]
+                                                  ['subtitle']),
+                                          sizedBox,
+                                          Hero(
+                                            tag: simulators[index]['subtitle'] +
+                                                (index + 1).toString(),
+                                            child: Container(
+                                              height: 80,
+                                              decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                                  image: AssetImage(
+                                                      simulators[index]
+                                                          ['image']),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              )
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   )

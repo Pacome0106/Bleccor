@@ -31,6 +31,8 @@ const String privacyUrl = 'https://baadhi.com/privacy';
 // link of terms & conditions
 const String termsAndConditions = 'https://baadhi.com/privacy';
 
+const String codeAccess = "uRf87Dc";
+
 List<Map<String, dynamic>> simulators = [
   {
     'title': 'Bilan - Matière sans réaction',
@@ -43,7 +45,7 @@ List<Map<String, dynamic>> simulators = [
   {
     'title':'Bilan - Matière sans réaction',
     'subtitle':'Cas dans le processus de Distillation',
-    'question':"""Un mélange liquide contient x(%) en masse de benzène et 55 % de Toluène doit être séparé dans une colonne à distiller continue. 
+    'question':"""Un mélange liquide contient x(%) en masse de benzène et le reste de Toluène doit être séparé dans une colonne à distiller continue. 
 Si la densité du liquide est de p et que y de mélange est alimenté dans la colonne, déterminez le débit massique de chaque constituant dans le distillat (overhead stream) et 
 le condensat (bottom stream) lorsque l’on atteint une pureté de z (%) en benzène dans la partie supérieure de la colonne et w (%) dans sa partie inferieure.
     """,

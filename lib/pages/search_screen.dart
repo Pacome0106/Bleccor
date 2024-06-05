@@ -3,6 +3,7 @@
 import 'package:blecor/pages/exercises_detail.dart';
 import 'package:blecor/pages/home_page.dart';
 import 'package:blecor/pages/widgets/bold_text.dart';
+import 'package:blecor/pages/widgets/get_code.dart';
 import 'package:blecor/pages/widgets/lign.dart';
 import 'package:blecor/pages/widgets/smol_text.dart';
 import 'package:blecor/pages/widgets/variables.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../generated/assets.dart';
+import '../models/preferences_manager/shared_preferences.dart';
 
 class SearchPage extends StatefulWidget {
   final List historyItems;
@@ -75,6 +77,7 @@ class _SearchPageState extends State<SearchPage>
   Widget build(BuildContext context) {
     bool hasSearchResults = searchResults.isNotEmpty;
     List filteredVideos = getHistoryByLetter(searchQuery.toLowerCase());
+    String code = MyPreferences.getCode();
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
@@ -118,7 +121,7 @@ class _SearchPageState extends State<SearchPage>
           onPressed: () => Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) =>  HomePage(),
+              builder: (context) => HomePage(),
             ),
             (route) => false,
           ),
@@ -166,81 +169,73 @@ class _SearchPageState extends State<SearchPage>
                         child: GridView.builder(
                           itemCount: filteredVideos.length,
                           gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 10,
-                              childAspectRatio: 0.8),
-                          itemBuilder: (context, index) =>
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ExercisesDetail(
-                                            title: filteredVideos[index]
-                                            ['title'],
-                                            subtitle: simulators[index]
-                                            ['subtitle'],
-                                            exercise: filteredVideos[index]
-                                            ['question'],
-                                            enter: filteredVideos[index]
-                                            ['enter'],
-                                            image: filteredVideos[index]
-                                            ['image'],
-                                            index: index + 1,
-                                          ),
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  mainAxisSpacing: 10,
+                                  crossAxisSpacing: 10,
+                                  childAspectRatio: 0.8),
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () {
+                              if (code == codeAccess) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ExercisesDetail(
+                                      title: filteredVideos[index]['title'],
+                                      subtitle: simulators[index]['subtitle'],
+                                      exercise: filteredVideos[index]
+                                          ['question'],
+                                      enter: filteredVideos[index]['enter'],
+                                      image: filteredVideos[index]['image'],
+                                      index: index + 1,
                                     ),
-                                  );
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: borderRadius,
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .background,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey
-                                            .withOpacity(0.3),
-                                        spreadRadius: 5,
-                                        blurRadius: 15,
-                                        offset: const Offset(0, 9),
-                                      )
-                                    ],
                                   ),
-                                  child: Column(
-                                    children: [
-                                      BoldText(
-                                          text: filteredVideos[index]
-                                          ['title'],
-                                          size: 14),
-                                      sizedBox,
-                                      SmolText(
-                                          text: filteredVideos[index]
-                                          ['subtitle']),
-                                      sizedBox,
-                                      Hero(
-                                        tag: filteredVideos[index]
-                                        ['subtitle'] +
-                                            (index + 1).toString(),
-                                        child: Container(
-                                          height: 80,
-                                          decoration: BoxDecoration(
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                  filteredVideos[index]
-                                                  ['image']),
-                                            ),
-                                          ),
+                                );
+                              } else {
+                                showDialogConfirm(
+                                    context, filteredVideos[index], index);
+                              }
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                borderRadius: borderRadius,
+                                color: Theme.of(context).colorScheme.background,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.3),
+                                    spreadRadius: 5,
+                                    blurRadius: 15,
+                                    offset: const Offset(0, 9),
+                                  )
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  BoldText(
+                                      text: filteredVideos[index]['title'],
+                                      size: 14),
+                                  sizedBox,
+                                  SmolText(
+                                      text: filteredVideos[index]['subtitle']),
+                                  sizedBox,
+                                  Hero(
+                                    tag: filteredVideos[index]['subtitle'] +
+                                        (index + 1).toString(),
+                                    child: Container(
+                                      height: 80,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage(
+                                              filteredVideos[index]['image']),
                                         ),
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
+                            ),
+                          ),
                         ),
                       ),
                     )
