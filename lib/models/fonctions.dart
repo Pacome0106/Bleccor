@@ -7,6 +7,8 @@ import 'package:blecor/models/preferences_manager/shared.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'class_manager/history_4.dart';
+
 class AllFonction {
   String doubleToString(double value) {
     return value.toStringAsFixed(2);
@@ -31,6 +33,7 @@ class AllFonction {
     return timeString;
   }
 
+  // -------- function to calcul 1 exercise ----------
   double findT(double x, dynamic y) {
     double t;
     if (y is String && y.contains('t')) {
@@ -48,12 +51,6 @@ class AllFonction {
 
     // Retourner la valeur de t
     return t;
-  }
-
-  double calculateCa(double x, double y, double z, double t, double ca0) {
-    double ca = (y / z) + (ca0 - (y / z)) * exp(-z * t);
-
-    return ca;
   }
 
   // -------- function to calcul 2 exercise ----------
@@ -75,8 +72,52 @@ class AllFonction {
     String T6 = AllFonction().doubleToString(D1 - (D1 * Z));
     String T7 = AllFonction().doubleToString(W1 - (W1 * W));
 
-    return """B6: $B6 kg/min / T6: $T6 kg/min
-B7: $B7 kg/min / T7: $T7 kg/min""";
+    return """B6: $B6 (kg/min) / T6: $T6 (kg/min)
+B7: $B7 (kg/min) / T7: $T7 (kg/min)""";
+  }
+
+  // -------- function to calcul 3 exercise ----------
+  double calculateCa(double x, double y, double z, double t, double ca0) {
+    double ca = (y / z) + (ca0 - (y / z)) * exp(-z * t);
+
+    return ca;
+  }
+
+  // -------- function to calcul 4 exercise ----------
+  String calculateD1D2L(
+    double pe,
+    double q,
+    double dh,
+    double z1,
+    double n,
+    double j,
+    double f,
+  ) {
+    double v1 =
+        sqrt(((-pe / (n * 1000 * q * 9.81)) + dh + z1 - (j * dh)) / 0.110525);
+    double v2 = v1 / 0.5625;
+    double d1 = sqrt((4 * q) / (3.14 * v1));
+    double d2 = (3 * d1) / 4;
+    double d = (d1 + d2) / 2;
+    double v = (v1+v2)/2;
+    double k = (v*v)/19.62;
+    double l = ((j*dh*d)/(f*k));
+
+    print(v1);
+    print(v2);
+    print(d1);
+    print(d2);
+    print(l);
+    String V1 = AllFonction().doubleToString(v1);
+    String V2 = AllFonction().doubleToString(v2);
+
+    String D1 = AllFonction().doubleToString(d1);
+    String D2 = AllFonction().doubleToString(d2);
+    String L = AllFonction().doubleToString(l);
+
+    return """v1: $V1 (m/s) / v2: $V2 (m/s)
+d1: $D1 (m) / d2: $D2 (m)
+L $L (m)""";
   }
 
   // -------- add a history01 to dataBase ----------
@@ -109,7 +150,7 @@ B7: $B7 kg/min / T7: $T7 kg/min""";
   Future<void> saveHistory02ToSharedPreferences(
       List<HistoryData2> history) async {
     List<String> historyItem =
-    history.map((item) => json.encode(item.toMap())).toList();
+        history.map((item) => json.encode(item.toMap())).toList();
     await PreferencesService.instance.setStringList('history_02', historyItem);
   }
 
@@ -130,6 +171,23 @@ B7: $B7 kg/min / T7: $T7 kg/min""";
     await PreferencesService.instance.setStringList('history_03', historyItem);
   }
 
+  // -------- add a history04 to dataBase ----------
+  Future<void> addHistory04(HistoryData4 item) async {
+    final List<HistoryData4> history = getHistory04FromSharedPreferences();
+
+    // Ajouter une history04 au stockage
+    history.add(item);
+    await saveHistory04ToSharedPreferences(history);
+  }
+
+  // -------- History04 to dataBase ------------
+  Future<void> saveHistory04ToSharedPreferences(
+      List<HistoryData4> history) async {
+    List<String> historyItem =
+    history.map((item) => json.encode(item.toMap())).toList();
+    await PreferencesService.instance.setStringList('history_04', historyItem);
+  }
+
   // --------- get all history01 to dataBase ---------
   List<HistoryData1> getHistory01FromSharedPreferences() {
     List<String>? historyJsonList =
@@ -143,10 +201,10 @@ B7: $B7 kg/min / T7: $T7 kg/min""";
     }).toList();
   }
 
-  // --------- get all history03 to dataBase ---------
+  // --------- get all history02 to dataBase ---------
   List<HistoryData2> getHistory02FromSharedPreferences() {
     List<String>? historyJsonList =
-    PreferencesService.instance.getStringList('history_02');
+        PreferencesService.instance.getStringList('history_02');
     if (historyJsonList == null) return [];
 
     return historyJsonList.map((historyJson) {
@@ -167,6 +225,17 @@ B7: $B7 kg/min / T7: $T7 kg/min""";
     }).toList();
   }
 
+  // --------- get all history04 to dataBase ---------
+  List<HistoryData4> getHistory04FromSharedPreferences() {
+    List<String>? historyJsonList =
+    PreferencesService.instance.getStringList('history_04');
+    if (historyJsonList == null) return [];
+
+    return historyJsonList.map((historyJson) {
+      Map<String, dynamic> historyMap = json.decode(historyJson);
+      return HistoryData4.fromMap(historyMap, historyMap['id'] ?? '');
+    }).toList();
+  }
   //  ------ Fontion to clear sharedPreferences -------------
   Future<void> clearSharedPreferences() async {
     // Utiliser SharedPreferences pour effacer toutes les données

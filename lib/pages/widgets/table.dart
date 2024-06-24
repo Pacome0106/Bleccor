@@ -165,6 +165,65 @@ class _TablePageState extends State<TablePage> {
       ];
       history = AllFonction().getHistory03FromSharedPreferences();
     }
+    else if (widget.index == 4) {
+      columns = [
+        DataColumn(
+          label: SmolText(
+            text: 'N°',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'Pe(MW)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'n(%)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'h(m)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'Q(m3/s)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'z1(m)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'j(%)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'f',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: BoldText(
+            text: 'd1, d2 et L(m)',
+            size: 14,
+          ),
+        ),
+      ];
+      history = AllFonction().getHistory04FromSharedPreferences();
+    }
     super.initState();
   }
 
@@ -199,6 +258,9 @@ class _TablePageState extends State<TablePage> {
                 key = 'history_02';
               } else if (widget.index == 3) {
                 key = 'history_03';
+              }
+              else if (widget.index == 4) {
+                key = 'history_04';
               }
               PreferencesService.instance.remove(key);
               Navigator.pushAndRemoveUntil(
@@ -264,8 +326,10 @@ class _TablePageState extends State<TablePage> {
                                   style: BorderStyle.solid,
                                   color: Colors.black,
                                   width: 0.4,
+
                                 ),
-                                columnSpacing: 10,
+                                columnSpacing: 20,
+                                dataRowHeight: 70,
                                 headingRowColor: MaterialStateProperty.all(
                                     Theme.of(context).colorScheme.secondary),
                                 columns: columns,
@@ -337,6 +401,56 @@ class _TablePageState extends State<TablePage> {
                                       )),
                                     ];
                                   } else if (widget.index == 3) {
+                                    rows = [
+                                      DataCell(
+                                        SmolText(
+                                          text: '${index + 1}',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      // Afficher l'index
+                                      DataCell(SmolText(
+                                          text: item.variable01.toString())),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable02.toString(),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable03.toString(),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable04.toString(),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable05.toString(),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable06.toString(),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable07.toString(),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      DataCell(BoldText(
+                                        text: item.result.toString(),
+                                        size: 14,
+                                      )),
+                                    ];
+                                  }else if (widget.index == 4) {
                                     rows = [
                                       DataCell(
                                         SmolText(

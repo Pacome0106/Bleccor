@@ -177,17 +177,18 @@ class _SearchPageState extends State<SearchPage>
                           itemBuilder: (context, index) => GestureDetector(
                             onTap: () {
                               if (code == codeAccess) {
+                                int indexSimulator = simulators.indexOf(filteredVideos[index]);
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ExercisesDetail(
                                       title: filteredVideos[index]['title'],
-                                      subtitle: simulators[index]['subtitle'],
+                                      subtitle: simulators[indexSimulator]['subtitle'],
                                       exercise: filteredVideos[index]
                                           ['question'],
                                       enter: filteredVideos[index]['enter'],
                                       image: filteredVideos[index]['image'],
-                                      index: index + 1,
+                                      index: indexSimulator + 1,
                                     ),
                                   ),
                                 );
@@ -213,8 +214,10 @@ class _SearchPageState extends State<SearchPage>
                               child: Column(
                                 children: [
                                   BoldText(
-                                      text: filteredVideos[index]['title'],
-                                      size: 14),
+                                    text: filteredVideos[index]['title'],
+                                    size: 14,
+                                    maxLines: 3,
+                                  ),
                                   sizedBox,
                                   SmolText(
                                       text: filteredVideos[index]['subtitle']),

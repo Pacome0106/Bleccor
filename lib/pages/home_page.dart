@@ -155,8 +155,10 @@ class _HomePageState extends State<HomePage> {
                                       child: Column(
                                         children: [
                                           BoldText(
-                                              text: simulators[index]['title'],
-                                              size: 14),
+                                            text: simulators[index]['title'],
+                                            size: 14,
+                                            maxLines: 3,
+                                          ),
                                           sizedBox,
                                           SmolText(
                                               text: simulators[index]

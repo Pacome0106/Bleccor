@@ -57,9 +57,21 @@ class Tile extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    BoldText(
-                      text: title.toUpperCase(),
-                      size: 14,
+                    SizedBox(
+                      width: 290,
+                      child: Text(
+                        title.toUpperCase(),
+                        softWrap: true,
+                        overflow: TextOverflow.ellipsis,
+                        // Ajout de l'overflow
+                        maxLines: 1,
+                        style: const TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0,
+                          decoration: TextDecoration.none,
+                        ),
+                      ),
                     ),
                     SizedBox(
                       width: 250,

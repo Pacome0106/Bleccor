@@ -2,6 +2,7 @@
 
 // import 'package:admob_flutter/admob_flutter.da
 
+import 'package:blecor/models/fonctions.dart';
 import 'package:blecor/models/preferences_manager/shared.dart';
 import 'package:blecor/pages/home_page.dart';
 import 'package:blecor/theme/theme_provider.dart';

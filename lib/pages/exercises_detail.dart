@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../models/class_manager/history_3.dart';
+import '../models/class_manager/history_4.dart';
 import '../models/fonctions.dart';
 
 class ExercisesDetail extends StatefulWidget {
@@ -47,12 +48,21 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
   TextEditingController cA0 = TextEditingController();
   TextEditingController temps = TextEditingController();
 
-  // exesice 3
+  // exersice 3
   TextEditingController w = TextEditingController();
   TextEditingController x = TextEditingController();
   TextEditingController y = TextEditingController();
   TextEditingController z = TextEditingController();
   TextEditingController p = TextEditingController();
+
+  //exersice 4
+  TextEditingController pe = TextEditingController();
+  TextEditingController n = TextEditingController();
+  TextEditingController h = TextEditingController();
+  TextEditingController q = TextEditingController();
+  TextEditingController z1 = TextEditingController();
+  TextEditingController j = TextEditingController();
+  TextEditingController f = TextEditingController();
 
   bool allView = false;
   bool isResult = false;
@@ -69,13 +79,21 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
       z.text = "99";
       w.text = "2";
       p.text = "0.85";
-    } else {
+    } else if (widget.index == 3) {
       initialVolume.text = "10";
       v0.text = "0.15";
       ca0.text = "10";
       ra.text = "0.005";
       v1.text = "0.15";
       cA0.text = "2.0";
+    } else {
+      pe.text = "40";
+      n.text = "85";
+      h.text = "60";
+      q.text = "1700";
+      z1.text = "0";
+      j.text = "20";
+      f.text = "0.03";
     }
     super.initState();
   }
@@ -403,200 +421,51 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                                   ),
                                 ],
                               )
-                            : Column(
-                                children: [
-                                  Row(
+                            : widget.index == 3
+                                ? Column(
                                     children: [
-                                      SmolText(text: "° Vo"),
-                                      const Expanded(child: SizedBox()),
-                                      BoldText(text: 'l/s', size: 20),
-                                      SizedBox(
-                                        width: 150,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: textField(
-                                            context: context,
-                                            alignment: TextAlign.center,
-                                            controller: v0,
-                                            placeholder: "Entrez la valeur ",
-                                            prefix: const Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 0.0, bottom: 0.0),
-                                              child: SizedBox(
-                                                height: 30,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° Vo"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: 'l/s', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: v0,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
                                               ),
                                             ),
-                                            onEditingComplete: () {
-                                              AllFonction()
-                                                  .closeKeyboard(context);
-                                            },
-                                            onTap: () {
-                                              setState(() => isResult = false);
-                                            },
-                                            number: true,
                                           ),
-                                        ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  sizedBox,
-                                  Row(
-                                    children: [
-                                      SmolText(text: "° CAo"),
-                                      const Expanded(child: SizedBox()),
-                                      BoldText(text: 'mol/l', size: 20),
-                                      SizedBox(
-                                        width: 150,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: textField(
-                                            context: context,
-                                            alignment: TextAlign.center,
-                                            controller: ca0,
-                                            placeholder: "Entrez la valeur ",
-                                            prefix: const Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 0.0, bottom: 0.0),
-                                              child: SizedBox(
-                                                height: 30,
-                                              ),
-                                            ),
-                                            onEditingComplete: () {
-                                              AllFonction()
-                                                  .closeKeyboard(context);
-                                            },
-                                            onTap: () {
-                                              setState(() => isResult = false);
-                                            },
-                                            number: true,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  sizedBox,
-                                  Row(
-                                    children: [
-                                      SmolText(text: "° V"),
-                                      const Expanded(child: SizedBox()),
-                                      BoldText(text: 'l', size: 20),
-                                      SizedBox(
-                                        width: 150,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: textField(
-                                            context: context,
-                                            alignment: TextAlign.center,
-                                            controller: initialVolume,
-                                            placeholder: "Entrez la valeur ",
-                                            prefix: const Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 0.0, bottom: 0.0),
-                                              child: SizedBox(
-                                                height: 30,
-                                              ),
-                                            ),
-                                            onEditingComplete: () {
-                                              AllFonction()
-                                                  .closeKeyboard(context);
-                                            },
-                                            onTap: () {
-                                              setState(() => isResult = false);
-                                            },
-                                            number: true,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  sizedBox,
-                                  Row(
-                                    children: [
-                                      SmolText(text: "° rA"),
-                                      const Expanded(child: SizedBox()),
-                                      BoldText(text: '*CA', size: 20),
-                                      SizedBox(
-                                        width: 150,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: textField(
-                                            context: context,
-                                            alignment: TextAlign.center,
-                                            controller: ra,
-                                            placeholder: "Entrez la valeur ",
-                                            prefix: const Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 0.0, bottom: 0.0),
-                                              child: SizedBox(
-                                                height: 30,
-                                              ),
-                                            ),
-                                            onEditingComplete: () {
-                                              AllFonction()
-                                                  .closeKeyboard(context);
-                                            },
-                                            onTap: () {
-                                              setState(() => isResult = false);
-                                            },
-                                            number: true,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  sizedBox,
-                                  Row(
-                                    children: [
-                                      SmolText(text: "° V1"),
-                                      const Expanded(child: SizedBox()),
-                                      BoldText(text: 'l/s', size: 20),
-                                      SizedBox(
-                                        width: 150,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: textField(
-                                            context: context,
-                                            alignment: TextAlign.center,
-                                            controller: v1,
-                                            placeholder: "Entrez la valeur ",
-                                            prefix: const Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 0.0, bottom: 0.0),
-                                              child: SizedBox(
-                                                height: 30,
-                                              ),
-                                            ),
-                                            onEditingComplete: () {
-                                              AllFonction()
-                                                  .closeKeyboard(context);
-                                            },
-                                            onTap: () {
-                                              setState(() => isResult = false);
-                                            },
-                                            number: true,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  sizedBox,
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SmolText(
-                                          text:
-                                              "° Avec t = 0, comme condition initiale CA"),
                                       sizedBox,
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
                                         children: [
+                                          SmolText(text: "° CAo"),
+                                          const Expanded(child: SizedBox()),
                                           BoldText(text: 'mol/l', size: 20),
                                           SizedBox(
                                             width: 150,
@@ -606,7 +475,212 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                                               child: textField(
                                                 context: context,
                                                 alignment: TextAlign.center,
-                                                controller: cA0,
+                                                controller: ca0,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° V"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: 'l', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: initialVolume,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° rA"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: '*CA', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: ra,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° V1"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: 'l/s', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: v1,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SmolText(
+                                              text:
+                                                  "° Avec t = 0, comme condition initiale CA"),
+                                          sizedBox,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              BoldText(text: 'mol/l', size: 20),
+                                              SizedBox(
+                                                width: 150,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10),
+                                                  child: textField(
+                                                    context: context,
+                                                    alignment: TextAlign.center,
+                                                    controller: cA0,
+                                                    placeholder:
+                                                        "Entrez la valeur ",
+                                                    prefix: const Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: 0.0,
+                                                          bottom: 0.0),
+                                                      child: SizedBox(
+                                                        height: 30,
+                                                      ),
+                                                    ),
+                                                    onEditingComplete: () {
+                                                      AllFonction()
+                                                          .closeKeyboard(
+                                                              context);
+                                                    },
+                                                    onTap: () {
+                                                      setState(() {
+                                                        isResult = false;
+                                                        isSave = false;
+                                                      });
+                                                    },
+                                                    number: true,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° t"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: 's', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: temps,
                                                 placeholder:
                                                     "Entrez la valeur ",
                                                 prefix: const Padding(
@@ -633,48 +707,276 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                                         ],
                                       ),
                                     ],
-                                  ),
-                                  sizedBox,
-                                  Row(
+                                  )
+                                : Column(
                                     children: [
-                                      SmolText(text: "° t"),
-                                      const Expanded(child: SizedBox()),
-                                      BoldText(text: 's', size: 20),
-                                      SizedBox(
-                                        width: 150,
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10),
-                                          child: textField(
-                                            context: context,
-                                            alignment: TextAlign.center,
-                                            controller: temps,
-                                            placeholder: "Entrez la valeur ",
-                                            prefix: const Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 0.0, bottom: 0.0),
-                                              child: SizedBox(
-                                                height: 30,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° Pe"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: 'MW', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: pe,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
                                               ),
                                             ),
-                                            onEditingComplete: () {
-                                              AllFonction()
-                                                  .closeKeyboard(context);
-                                            },
-                                            onTap: () {
-                                              setState(() {
-                                                isResult = false;
-                                                isSave = false;
-                                              });
-                                            },
-                                            number: true,
                                           ),
-                                        ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° η"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: '%', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: n,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° h"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: 'm', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: h,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° Q"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: 'm3/s', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: q,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° z1"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: 'm', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: z1,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° j"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: '%', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: j,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      sizedBox,
+                                      Row(
+                                        children: [
+                                          SmolText(text: "° f"),
+                                          const Expanded(child: SizedBox()),
+                                          BoldText(text: '', size: 20),
+                                          SizedBox(
+                                            width: 150,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10),
+                                              child: textField(
+                                                context: context,
+                                                alignment: TextAlign.center,
+                                                controller: f,
+                                                placeholder:
+                                                    "Entrez la valeur ",
+                                                prefix: const Padding(
+                                                  padding: EdgeInsets.only(
+                                                      top: 0.0, bottom: 0.0),
+                                                  child: SizedBox(
+                                                    height: 30,
+                                                  ),
+                                                ),
+                                                onEditingComplete: () {
+                                                  AllFonction()
+                                                      .closeKeyboard(context);
+                                                },
+                                                onTap: () {
+                                                  setState(
+                                                      () => isResult = false);
+                                                },
+                                                number: true,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                ],
-                              ),
                     sizedBox,
                     sizedBox,
                     BoldText(text: "Représentation", size: 16),
@@ -727,7 +1029,7 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                                           .calculateB6T6B7T7(Y, X, Z, W, P);
                                     });
                                     print("========> result $result");
-                                  } else {
+                                  } else if (widget.index == 3) {
                                     double x = double.parse(initialVolume.text);
                                     double y = double.parse(v0.text) *
                                         double.parse(ca0.text);
@@ -741,9 +1043,25 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                                     setState(() {
                                       isResult = true;
                                       isSave = false;
-                                      result = AllFonction().doubleToString(caValue);
+                                      result =
+                                          AllFonction().doubleToString(caValue);
                                     });
                                     print("=======> $caValue");
+                                  } else {
+                                    double Pe = double.parse(pe.text) *1000000;
+                                    double N = double.parse(n.text) / 100;
+                                    double H = double.parse(h.text);
+                                    double Q = double.parse(q.text);
+                                    double Z1 = double.parse(z1.text);
+                                    double J = double.parse(j.text) / 100;
+                                    double F = double.parse(f.text);
+                                    setState(() {
+                                      isResult = true;
+                                      isSave = false;
+                                      result = AllFonction().calculateD1D2L(
+                                          Pe, Q, H, Z1, N, J, F);
+                                    });
+                                    print("=======> $result");
                                   }
                                 },
                                 child: SmolText(
@@ -765,10 +1083,14 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                                           text:
                                               'Le débit massique de chaque constituant dans le distillat (overhead stream) et le condensat (bottom stream) sont: ',
                                         )
-                                      : SmolText(
-                                          text:
-                                              'La concentration de A pour un processus non-transitoire(CA) est:  ',
-                                        ),
+                                      : widget.index == 3
+                                          ? SmolText(
+                                              text:
+                                                  'La concentration de A pour un processus non-transitoire(CA) est:  ',
+                                            )
+                                          : SmolText(
+                                              text:
+                                                  "d1(diamètre la conduite en amont), d2(diamètre en aval) et L (longueur) de la conduit forcée sont:"),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -825,6 +1147,20 @@ class _ExercisesDetailState extends State<ExercisesDetail> {
                                   result: result,
                                 );
                                 AllFonction().addHistory03(historyData3);
+                              }else if (widget.index == 4) {
+                                HistoryData4 historyData4 = HistoryData4(
+                                  title: widget.subtitle,
+                                  date: now.toString(),
+                                  variable01: pe.text,
+                                  variable02: n.text,
+                                  variable03: h.text,
+                                  variable04: q.text,
+                                  variable05: z1.text,
+                                  variable06: j.text,
+                                  variable07: f.text,
+                                  result: result,
+                                );
+                                AllFonction().addHistory04(historyData4);
                               }
                               setState(() => isSave = true);
                             },

@@ -22,12 +22,14 @@ class _HistoryPageState extends State<HistoryPage> {
   List history01 = [];
   List history02 = [];
   List history03 = [];
+  List history04 = [];
 
   @override
   void initState() {
     history01 = AllFonction().getHistory01FromSharedPreferences();
     history02 = AllFonction().getHistory02FromSharedPreferences();
     history03 = AllFonction().getHistory03FromSharedPreferences();
+    history04 = AllFonction().getHistory04FromSharedPreferences();
     super.initState();
   }
 
@@ -68,7 +70,8 @@ class _HistoryPageState extends State<HistoryPage> {
           padding: const EdgeInsets.only(left: 10, right: 10),
           sliver: history01.isNotEmpty ||
                   history02.isNotEmpty ||
-                  history03.isNotEmpty
+                  history03.isNotEmpty ||
+                  history04.isNotEmpty
               ? SliverList(
                   delegate: SliverChildListDelegate(
                     [
@@ -78,13 +81,13 @@ class _HistoryPageState extends State<HistoryPage> {
                             Tile(
                               title: simulators[0]['title'],
                               subtitle: simulators[0]['subtitle'],
-                              index:  1,
+                              index: 1,
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => TablePage(
-                                      index:  1,
+                                      index: 1,
                                     ),
                                   ),
                                 );
@@ -93,20 +96,19 @@ class _HistoryPageState extends State<HistoryPage> {
                             sizedBox,
                           ],
                         ),
-
                       if (history02.isNotEmpty)
                         Column(
                           children: [
                             Tile(
                               title: simulators[1]['title'],
                               subtitle: simulators[1]['subtitle'],
-                              index:  2,
+                              index: 2,
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => TablePage(
-                                      index:  2,
+                                      index: 2,
                                     ),
                                   ),
                                 );
@@ -121,13 +123,34 @@ class _HistoryPageState extends State<HistoryPage> {
                             Tile(
                               title: simulators[2]['title'],
                               subtitle: simulators[2]['subtitle'],
-                              index:  3,
+                              index: 3,
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => TablePage(
-                                      index:  3,
+                                      index: 3,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            sizedBox,
+                          ],
+                        ),
+                      if (history04.isNotEmpty)
+                        Column(
+                          children: [
+                            Tile(
+                              title: simulators[3]['title'],
+                              subtitle: simulators[3]['subtitle'],
+                              index: 4,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TablePage(
+                                      index: 4,
                                     ),
                                   ),
                                 );

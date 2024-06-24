@@ -27,9 +27,9 @@ final newVersion = NewVersionPlus(
 const String playStoreUrl =
     'https://play.google.com/store/apps/details?id=com.bitz.bleccor';
 // link of privacy policy
-const String privacyUrl = 'https://baadhi.com/privacy';
+const String privacyUrl = 'https://raw.githubusercontent.com/Pacome0106/Bleccor/main/Privacy.md?token=GHSAT0AAAAAACSVAH357JRLRTE26U5BUAZIZTAGFVQ';
 // link of terms & conditions
-const String termsAndConditions = 'https://baadhi.com/privacy';
+const String termsAndConditions = 'https://raw.githubusercontent.com/Pacome0106/Bleccor/main/Privacy.md?token=GHSAT0AAAAAACSVAH357JRLRTE26U5BUAZIZTAGFVQ';
 
 const String codeAccess = "uRf87Dc";
 
@@ -60,6 +60,28 @@ le condensat (bottom stream) lorsque l’on atteint une pureté de z (%) en benz
 Le diagramme ci-après représente le processus. L’agitation étant parfaite, la concentration du produit sortant du réacteur est la même que celle de la solution à l’intérieur de ce dernier. Cette solution contient initialement CA mol/l du réactif A. Calculez CA,S, concentration de A pour un processus non-transitoire""",
     'enter': '',
     'image': Assets.assetsBillan03,
+  },
+  {
+    'title': 'Dimensionnement de la conduite forcée d’une centrale hydroélectrique',
+    'subtitle': "Dimensionnement de la conduite forcée",
+    'question':
+    """L’énergie nécessaire pour pallier le déficit de la ville de X doit aller au-delà d’une nouvelle production de 𝑷e MW; par prévention dimensionnons en plus de cette énergie à produire. 
+•Soit 𝑷e MW 
+•Nous savons que la puissance est donnée par la relation 
+  𝑷e= η𝜌𝑄𝑔[(Δ𝒉+𝒛𝟏)+𝟏/𝟐𝒈(𝒗𝟏𝟐−𝒗𝟐𝟐)−𝒇(𝑳/𝑫)(𝒗𝟐/𝟐𝒈)]
+ 𝑆1𝑣1=𝑆2𝑣2
+ Prenons η l’efficacité globale ou rendement du système η par défaut pour l’estimation d’une bonne production.
+•Prenons aussi 𝜌=1000 kg/m3 qui est la densité de l’eau à une température ambiante de 20°C à X et la hauteur h m 
+•Q  m3/s : debit de la chute la cité X.
+Calculez d1(diamètre la conduite en amont), d2(diamètre en aval) et L (longueur) de la conduit force.
+
+Hypothèses :
+
+•les pertes charges peuvent varier entre 5 à 20% 
+•Les machines installées présentent des pertes en hauteur de 20 % or, les machines à installer nécessitent des conduites beaucoup plus larges en termes de diamètre. D’où les pertes peuvent être estimés à j % de l’énergie; les pertes de charge étant inversement proportionnelles au diamètre.;
+•soit à supposer aussi le diamètre à l’entrée, 𝑑1= 4/3 d2""",
+    'enter': '',
+    'image': Assets.assetsBillan04,
   },
 
 ];

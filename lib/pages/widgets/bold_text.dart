@@ -7,23 +7,28 @@ class BoldText extends StatelessWidget {
     super.key,
     this.size = 20,
     this.color,
+    this.maxLines,
+    this.decoration,
     required this.text,
   });
   Color? color;
   double size;
+  int? maxLines ;
   final String? text;
+  TextDecoration? decoration = TextDecoration.none;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text!,
+      maxLines: maxLines,
       style: TextStyle(
         fontSize: size,
         fontFamily: 'Montserrat',
         color: color,
         fontWeight: FontWeight.bold,
         letterSpacing: 0,
-        decoration: TextDecoration.none,
+        decoration: decoration,
       ),
     );
   }
