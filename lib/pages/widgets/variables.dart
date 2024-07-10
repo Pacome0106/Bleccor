@@ -27,9 +27,11 @@ final newVersion = NewVersionPlus(
 const String playStoreUrl =
     'https://play.google.com/store/apps/details?id=com.bitz.bleccor';
 // link of privacy policy
-const String privacyUrl = 'https://raw.githubusercontent.com/Pacome0106/Bleccor/main/Privacy.md?token=GHSAT0AAAAAACSVAH357JRLRTE26U5BUAZIZTAGFVQ';
+const String privacyUrl =
+    'https://raw.githubusercontent.com/Pacome0106/Bleccor/main/Privacy.md?token=GHSAT0AAAAAACSVAH357JRLRTE26U5BUAZIZTAGFVQ';
 // link of terms & conditions
-const String termsAndConditions = 'https://raw.githubusercontent.com/Pacome0106/Bleccor/main/Privacy.md?token=GHSAT0AAAAAACSVAH357JRLRTE26U5BUAZIZTAGFVQ';
+const String termsAndConditions =
+    'https://raw.githubusercontent.com/Pacome0106/Bleccor/main/Privacy.md?token=GHSAT0AAAAAACSVAH357JRLRTE26U5BUAZIZTAGFVQ';
 
 const String codeAccess = "uRf87Dc";
 
@@ -43,14 +45,15 @@ List<Map<String, dynamic>> simulators = [
     'image': Assets.assetsBillan01,
   },
   {
-    'title':'Bilan - Matière sans réaction',
-    'subtitle':'Cas dans le processus de Distillation',
-    'question':"""Un mélange liquide contient x(%) en masse de benzène et le reste de Toluène doit être séparé dans une colonne à distiller continue. 
+    'title': 'Bilan - Matière sans réaction',
+    'subtitle': 'Cas dans le processus de Distillation',
+    'question':
+        """Un mélange liquide contient x(%) en masse de benzène et le reste de Toluène doit être séparé dans une colonne à distiller continue. 
 Si la densité du liquide est de p et que y de mélange est alimenté dans la colonne, déterminez le débit massique de chaque constituant dans le distillat (overhead stream) et 
 le condensat (bottom stream) lorsque l’on atteint une pureté de z (%) en benzène dans la partie supérieure de la colonne et w (%) dans sa partie inferieure.
     """,
-    'enter':'',
-    'image':Assets.assetsBillan02,
+    'enter': '',
+    'image': Assets.assetsBillan02,
   },
   {
     'title': 'Bilan - Matière avec réaction',
@@ -62,10 +65,11 @@ Le diagramme ci-après représente le processus. L’agitation étant parfaite, 
     'image': Assets.assetsBillan03,
   },
   {
-    'title': 'Dimensionnement de la conduite forcée d’une centrale hydroélectrique',
+    'title':
+        'Dimensionnement de la conduite forcée d’une centrale hydroélectrique',
     'subtitle': "Dimensionnement de la conduite forcée",
     'question':
-    """L’énergie nécessaire pour pallier le déficit de la ville de X doit aller au-delà d’une nouvelle production de 𝑷e MW; par prévention dimensionnons en plus de cette énergie à produire. 
+        """L’énergie nécessaire pour pallier le déficit de la ville de X doit aller au-delà d’une nouvelle production de 𝑷e MW; par prévention dimensionnons en plus de cette énergie à produire. 
 •Soit 𝑷e MW 
 •Nous savons que la puissance est donnée par la relation 
   𝑷e= η𝜌𝑄𝑔[(Δ𝒉+𝒛𝟏)+𝟏/𝟐𝒈(𝒗𝟏𝟐−𝒗𝟐𝟐)−𝒇(𝑳/𝑫)(𝒗𝟐/𝟐𝒈)]
@@ -83,5 +87,20 @@ Hypothèses :
     'enter': '',
     'image': Assets.assetsBillan04,
   },
-
+  {
+    'title': 'Dimensionnement du barrage',
+    'subtitle': "Dimensionnement du barrage",
+    'question': """• Volume du réservoir à pleine capacité pour un réservoir
+de 10 km2 et une hauteur moyenne d’eau h (supposons
+h m) pour cet exemple.
+• V = S * h = 10*106 km2 *10 m = 100*106 m3
+• La taille du réservoir permet de gérer les variations
+saisonnières de débit, assurant une production
+constante.
+• Le poids d’eau = ρ*V*g = 1000*100*106*9,81
+= 9,81*1011 N (Min force, F
+agissant sur le mur)""",
+    'enter': '',
+    'image': Assets.assetsBillan05,
+  },
 ];

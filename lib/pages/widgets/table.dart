@@ -224,6 +224,47 @@ class _TablePageState extends State<TablePage> {
       ];
       history = AllFonction().getHistory04FromSharedPreferences();
     }
+    else if (widget.index == 5) {
+      columns = [
+        DataColumn(
+          label: SmolText(
+            text: 'N°',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'H(m)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'W(m)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'Masse Vol(kg/m3)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'AB(m)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+        DataColumn(
+          label: SmolText(
+            text: 'L(m)',
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ];
+      history = AllFonction().getHistory05FromSharedPreferences();
+    }
     super.initState();
   }
 
@@ -261,6 +302,8 @@ class _TablePageState extends State<TablePage> {
               }
               else if (widget.index == 4) {
                 key = 'history_04';
+              }else if (widget.index == 5) {
+                key = 'history_05';
               }
               PreferencesService.instance.remove(key);
               Navigator.pushAndRemoveUntil(
@@ -492,6 +535,39 @@ class _TablePageState extends State<TablePage> {
                                       DataCell(
                                         SmolText(
                                           text: item.variable07.toString(),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      DataCell(BoldText(
+                                        text: item.result.toString(),
+                                        size: 14,
+                                      )),
+                                    ];
+                                  }
+                                  else if (widget.index == 5) {
+                                    rows = [
+                                      DataCell(
+                                        SmolText(
+                                          text: '${index + 1}',
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
+                                      // Afficher l'index
+                                      DataCell(SmolText(
+                                          text: item.variable01.toString())),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable02.toString(),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable03.toString(),
+                                        ),
+                                      ),
+                                      DataCell(
+                                        SmolText(
+                                          text: item.variable04.toString(),
                                           textAlign: TextAlign.center,
                                         ),
                                       ),

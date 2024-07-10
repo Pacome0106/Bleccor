@@ -23,6 +23,7 @@ class _HistoryPageState extends State<HistoryPage> {
   List history02 = [];
   List history03 = [];
   List history04 = [];
+  List history05 = [];
 
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _HistoryPageState extends State<HistoryPage> {
     history02 = AllFonction().getHistory02FromSharedPreferences();
     history03 = AllFonction().getHistory03FromSharedPreferences();
     history04 = AllFonction().getHistory04FromSharedPreferences();
+    history05 = AllFonction().getHistory05FromSharedPreferences();
     super.initState();
   }
 
@@ -71,7 +73,8 @@ class _HistoryPageState extends State<HistoryPage> {
           sliver: history01.isNotEmpty ||
                   history02.isNotEmpty ||
                   history03.isNotEmpty ||
-                  history04.isNotEmpty
+                  history04.isNotEmpty ||
+                  history05.isNotEmpty
               ? SliverList(
                   delegate: SliverChildListDelegate(
                     [
@@ -151,6 +154,27 @@ class _HistoryPageState extends State<HistoryPage> {
                                   MaterialPageRoute(
                                     builder: (context) => TablePage(
                                       index: 4,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            sizedBox,
+                          ],
+                        ),
+                      if (history05.isNotEmpty)
+                        Column(
+                          children: [
+                            Tile(
+                              title: simulators[4]['title'],
+                              subtitle: simulators[4]['subtitle'],
+                              index: 5,
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TablePage(
+                                      index: 5,
                                     ),
                                   ),
                                 );

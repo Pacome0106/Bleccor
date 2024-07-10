@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 import 'class_manager/history_4.dart';
+import 'class_manager/history_5.dart';
 
 class AllFonction {
   String doubleToString(double value) {
@@ -99,9 +100,9 @@ B7: $B7 (kg/min) / T7: $T7 (kg/min)""";
     double d1 = sqrt((4 * q) / (3.14 * v1));
     double d2 = (3 * d1) / 4;
     double d = (d1 + d2) / 2;
-    double v = (v1+v2)/2;
-    double k = (v*v)/19.62;
-    double l = ((j*dh*d)/(f*k));
+    double v = (v1 + v2) / 2;
+    double k = (v * v) / 19.62;
+    double l = ((j * dh * d) / (f * k));
 
     print(v1);
     print(v2);
@@ -118,6 +119,24 @@ B7: $B7 (kg/min) / T7: $T7 (kg/min)""";
     return """v1: $V1 (m/s) / v2: $V2 (m/s)
 d1: $D1 (m) / d2: $D2 (m)
 L $L (m)""";
+  }
+
+  // -------- function to calcul 5 exercise ----------
+  String calculateL(
+    double ht,
+    double wl,
+    double mv,
+    double ab,
+  ) {
+    double Mmur = 0.5 * 1000 * wl * (ht * ht);
+    double Vmur = Mmur / mv;
+    double Vp = wl * ht * ab;
+    double Vprism = Vmur - Vp;
+    double b = (2 * Vprism) / (ht * wl);
+    double l = b + ab;
+    String L = AllFonction().doubleToString(l);
+
+    return "$L m";
   }
 
   // -------- add a history01 to dataBase ----------
@@ -184,8 +203,26 @@ L $L (m)""";
   Future<void> saveHistory04ToSharedPreferences(
       List<HistoryData4> history) async {
     List<String> historyItem =
-    history.map((item) => json.encode(item.toMap())).toList();
+        history.map((item) => json.encode(item.toMap())).toList();
     await PreferencesService.instance.setStringList('history_04', historyItem);
+  }
+
+
+  // -------- add a history05 to dataBase ----------
+  Future<void> addHistory05(HistoryData5 item) async {
+    final List<HistoryData5> history = getHistory05FromSharedPreferences();
+
+    // Ajouter une history05 au stockage
+    history.add(item);
+    await saveHistory05ToSharedPreferences(history);
+  }
+
+  // -------- History05 to dataBase ------------
+  Future<void> saveHistory05ToSharedPreferences(
+      List<HistoryData5> history) async {
+    List<String> historyItem =
+    history.map((item) => json.encode(item.toMap())).toList();
+    await PreferencesService.instance.setStringList('history_05', historyItem);
   }
 
   // --------- get all history01 to dataBase ---------
@@ -228,7 +265,7 @@ L $L (m)""";
   // --------- get all history04 to dataBase ---------
   List<HistoryData4> getHistory04FromSharedPreferences() {
     List<String>? historyJsonList =
-    PreferencesService.instance.getStringList('history_04');
+        PreferencesService.instance.getStringList('history_04');
     if (historyJsonList == null) return [];
 
     return historyJsonList.map((historyJson) {
@@ -236,6 +273,19 @@ L $L (m)""";
       return HistoryData4.fromMap(historyMap, historyMap['id'] ?? '');
     }).toList();
   }
+
+  // --------- get all history04 to dataBase ---------
+  List<HistoryData5> getHistory05FromSharedPreferences() {
+    List<String>? historyJsonList =
+    PreferencesService.instance.getStringList('history_05');
+    if (historyJsonList == null) return [];
+
+    return historyJsonList.map((historyJson) {
+      Map<String, dynamic> historyMap = json.decode(historyJson);
+      return HistoryData5.fromMap(historyMap, historyMap['id'] ?? '');
+    }).toList();
+  }
+
   //  ------ Fontion to clear sharedPreferences -------------
   Future<void> clearSharedPreferences() async {
     // Utiliser SharedPreferences pour effacer toutes les données
